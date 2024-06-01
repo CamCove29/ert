@@ -1,11 +1,10 @@
 package com.example.demo.cancion.application;
 
 import com.example.demo.cancion.domain.CancionService;
+import com.example.demo.cancion.dto.CancionDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/cancion")
@@ -19,7 +18,20 @@ public class CancionController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createCancion(@RequestBody CancionCreateDto cancionCreateDto) {
+    public ResponseEntity<String> createCancion(@RequestBody CancionDto cancionCreateDto) {
         cancionService.createCancion(cancionCreateDto);
         return ResponseEntity.ok("Cancion created.");
-}
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateCancion(@RequestBody CancionDto cancionUpdateDto) {
+        cancionService.updateCancion(cancionUpdateDto);
+        return ResponseEntity.ok("Cancion updated.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCancion(@PathVariable CancionDto Long id) {
+        cancionService.deleteCancion(id);
+        return ResponseEntity.ok("Cancion deleted.");
+    }
+
