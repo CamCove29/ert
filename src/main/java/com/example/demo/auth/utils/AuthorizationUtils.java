@@ -20,6 +20,7 @@ public class AuthorizationUtils {
         this.userService = userService;
     }
 
+
     public boolean isAdminOrResourceOwner(int id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
