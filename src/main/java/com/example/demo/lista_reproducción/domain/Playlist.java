@@ -12,6 +12,7 @@ import java.util.List;
 public class Playlist {
     @Id
     private int idPlaylist;
+    private int idUser;
     private String nombre;
     private Date fechaDeCreacion;
 
