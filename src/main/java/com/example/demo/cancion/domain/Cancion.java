@@ -2,8 +2,13 @@ package com.example.demo.cancion.domain;
 
 import com.example.demo.user.domain.User;
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 
+@Entity
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cancion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
