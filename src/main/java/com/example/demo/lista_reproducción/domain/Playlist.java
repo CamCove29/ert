@@ -1,5 +1,7 @@
 package com.example.demo.lista_reproducción.domain;
 
+import com.example.demo.cancion.domain.Cancion;
+import com.example.demo.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ public class Playlist {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    private User user;
 
     @OneToMany(mappedBy = "playlist")
     private List<Cancion> canciones;
