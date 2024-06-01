@@ -1,9 +1,8 @@
 package com.example.demo.user.domain;
-
-
+import com.example.demo.lista_reproducción.domain.Playlist;
 import jakarta.persistence.*;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,7 +14,7 @@ public class User {
     private Date fechaDeRegistro;
 
     @OneToMany(mappedBy = "user")
-    private List<PlayList> listasDeReproduccion;
+    private List<Playlist> listasDeReproduccion;
 
     public int getIdUser() {
         return idUser;
@@ -49,13 +48,17 @@ public class User {
         this.fechaDeRegistro = fechaDeRegistro;
     }
 
-    public List<PlayList> getListasDeReproduccion() {
+    public List<Playlist> getListasDeReproduccion() {
         return listasDeReproduccion;
     }
 
 
-    public void setListasDeReproduccion(List<PlayList> listasDeReproduccion) {
+    public void setListasDeReproduccion(List<Playlist> listasDeReproduccion) {
         this.listasDeReproduccion = listasDeReproduccion;
     }
 }
+
+
+
+
 

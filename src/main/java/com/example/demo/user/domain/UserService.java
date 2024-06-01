@@ -1,15 +1,20 @@
 package com.example.demo.user.domain;
 
 
+import com.example.demo.lista_reproducción.domain.Playlist;
+import com.example.demo.lista_reproducción.infrastructure.PlaylistRepository;
 import com.example.demo.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PlaylistRepository playListRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -26,6 +31,31 @@ public class UserService {
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+
+    public User loginUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
+
+    public List<Playlist> getAllPlayListsByUserId(int userId) {
+        return playListRepository.findByUserId(userId);
+    }
+
+    public void createPlayList(int userId, Playlist playList) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            playList.setUser(user);
+            return playListRepository.save(playList);
+        }
+    }
 }
+
+
+
+
+
 
 
