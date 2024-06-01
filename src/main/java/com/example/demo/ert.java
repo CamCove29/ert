@@ -25,8 +25,8 @@ public class ert {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("camila.covenas@utec.edu.pe");
-        mailSender.setPassword("12345678");
+        mailSender.setUsername("andrea.coa@utec.edu.pe");
+        mailSender.setPassword("eylewuippoqsmzbo");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
