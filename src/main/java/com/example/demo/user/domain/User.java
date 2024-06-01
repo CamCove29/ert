@@ -20,6 +20,16 @@ public class User {
         return idUser;
     }
 
+    public String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }

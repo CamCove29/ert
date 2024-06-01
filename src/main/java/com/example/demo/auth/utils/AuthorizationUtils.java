@@ -26,8 +26,8 @@ public class AuthorizationUtils {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         String role = userDetails.getAuthorities().toArray()[0].toString();
-        User passenger= userService.findByEmail(username, role);
-        return passenger.getId()==id || passenger.getRole().equals(Role.ADMIN);
+        User passenger= userService.findByEmail(username);
+        return passenger.getIdUser()==id;
     }
 
     public String getCurrentUserEmail() {

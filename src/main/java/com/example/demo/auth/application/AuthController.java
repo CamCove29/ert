@@ -29,9 +29,9 @@ public class AuthController {
     public ResponseEntity<JwtAuthResponse> register(@RequestBody RegisterReq req) {
         return ResponseEntity.ok(authService.register(req));
     }
-    @PostMapping("/admin")
-    public ResponseEntity<Object> crearAdmin(@RequestBody RegisterReq req) {
-        authService.crearAdmin(req);
-        return ResponseEntity.ok("admin creado");
-    }
+//    @PostMapping("/admin")
+//    public ResponseEntity<Object> crearAdmin(@RequestBody RegisterReq req) {
+//        authService.crearAdmin(req);
+//        return ResponseEntity.ok("admin creado");
+//    }
 }

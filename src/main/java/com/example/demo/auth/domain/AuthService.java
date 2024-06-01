@@ -25,13 +25,13 @@ public class AuthService {
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
-    private final UserRepository<User> userRepository;
+    private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public AuthService(UserRepository<User> userRepository, JwtService jwtService, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
@@ -56,7 +56,6 @@ public class AuthService {
         if (user.isPresent()) throw new UserAlreadyExistException("Email is already registered");
         User user1 = modelMapper.map(req, User.class);
         user1.setPassword(passwordEncoder.encode(req.getPassword()));
-        user1.setRole(Role.USER);
         userRepository.save(user1);
         JwtAuthResponse response = new JwtAuthResponse();
         response.setToken(jwtService.generateToken(user1));
@@ -66,15 +65,14 @@ public class AuthService {
 
         return response;
     }
-    public void crearAdmin(RegisterReq req){
-
-        Optional<User> user = userRepository.findByEmail(req.getEmail());
-        if (user.isPresent()) throw new UserAlreadyExistException("Email is already registered");
-        User user1 = modelMapper.map(req, User.class);
-        user1.setPassword(passwordEncoder.encode(req.getPassword()));
-        user1.setRole(Role.ADMIN);
-        userRepository.save(user1);
-    }
+//    public void crearAdmin(RegisterReq req){
+//
+//        Optional<User> user = userRepository.findByEmail(req.getEmail());
+//        if (user.isPresent()) throw new UserAlreadyExistException("Email is already registered");
+//        User user1 = modelMapper.map(req, User.class);
+//        user1.setPassword(passwordEncoder.encode(req.getPassword()));
+//        userRepository.save(user1);
+//    }
 
 
 
