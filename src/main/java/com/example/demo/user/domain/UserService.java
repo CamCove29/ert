@@ -41,14 +41,17 @@ public class UserService {
     }
 
     public List<Playlist> getAllPlayListsByUserId(int userId) {
-        return playListRepository.findByUserId(userId);
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return user.getListasDeReproduccion();
+        }
     }
 
     public void createPlayList(int userId, Playlist playList) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             playList.setUser(user);
-            return playListRepository.save(playList);
+            playListRepository.save(playList);
         }
     }
 }
