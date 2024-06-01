@@ -3,29 +3,31 @@ package com.example.demo.cancion.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
 
 @Data
 @Builder
+@Getter
 public class CancionDto {
 
     @NotBlank
     private String titulo;
 
     @NotBlank
-    private String artista;
+    private Integer artistaId;
 
     @NotBlank
-    private String album;
+    private Integer albumId;
 
     @NonNull
     private int duracion;
 
     @NotBlank
-    private String user;
+    private Integer userId;
 
     @NotBlank
-    private String playlist;
+    private Integer playlistId;
 
 
 }

@@ -11,12 +11,13 @@ public class Artista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArtist;
+
     private String nombre;
 
     @OneToMany(mappedBy = "artista")
     private List<Cancion> canciones;
 
-    public int getIdArtist() {
+    public Integer getIdArtist() {
         return idArtist;
     }
 
