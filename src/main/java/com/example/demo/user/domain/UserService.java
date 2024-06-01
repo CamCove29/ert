@@ -1,35 +1,30 @@
 package com.example.demo.user.domain;
 
+
 import com.example.demo.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
-public  class UserService {
-
-    private final UserRepository<User> userRepository;
+public class UserService {
     @Autowired
-    public UserService(UserRepository<User> userRepository) {
-        this.userRepository = userRepository;
+    private UserRepository userRepository;
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public User findByEmail(String username, String role) {
-        User usuario;
-        usuario = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Usuario no autorizado"));
-        return usuario;
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    @Bean(name = "UserDetailsService")
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            User user = userRepository.findByEmail(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            return (UserDetails) user;
-        };
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(int id) {
+        userRepository.deleteById(id);
     }
 }
 

@@ -1,66 +1,61 @@
 package com.example.demo.user.domain;
 
+
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 
-@Data
 @Entity
-@Table(name = "users")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)// se modifica dependiendo de las entidades hijas
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;//fijo puede ser int o Long
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)//fijo
+    private int idUser;
+    private String nombre;
     private String email;
+    private Date fechaDeRegistro;
 
-    @Column(nullable = false)//fijo
-    private String password;
+    @OneToMany(mappedBy = "user")
+    private List<PlayList> listasDeReproduccion;
 
-    @Column(nullable = false)
-    private Role role;
+    public int getIdUser() {
+        return idUser;
+    }
 
-    @Transient
-    private String rolePrefix = "ROLE_";
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rolePrefix + role.name()));
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getFechaDeRegistro() {
+        return fechaDeRegistro;
+    }
+
+    public void setFechaDeRegistro(Date fechaDeRegistro) {
+        this.fechaDeRegistro = fechaDeRegistro;
+    }
+
+    public List<PlayList> getListasDeReproduccion() {
+        return listasDeReproduccion;
     }
 
 
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void setListasDeReproduccion(List<PlayList> listasDeReproduccion) {
+        this.listasDeReproduccion = listasDeReproduccion;
     }
 }
+
