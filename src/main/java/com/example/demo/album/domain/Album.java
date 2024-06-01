@@ -1,5 +1,6 @@
 package com.example.demo.album.domain;
 
+import com.example.demo.cancion.domain.Cancion;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

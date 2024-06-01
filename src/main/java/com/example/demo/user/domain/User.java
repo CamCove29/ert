@@ -1,8 +1,5 @@
 package com.example.demo.user.domain;
-
-
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -58,4 +55,8 @@ public class User {
         this.listasDeReproduccion = listasDeReproduccion;
     }
 }
+
+
+
+
 
