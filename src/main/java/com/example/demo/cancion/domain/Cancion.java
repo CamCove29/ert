@@ -1,9 +1,16 @@
 package com.example.demo.cancion.domain;
 
+import com.example.demo.album.domain.Album;
+import com.example.demo.lista_reproducción.domain.Playlist;
 import com.example.demo.user.domain.User;
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 
+@Entity
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cancion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +20,7 @@ public class Cancion {
     @NonNull
     private String titulo;
 
-    @OneToMany
+    @ManyToOne
     @NonNull
     private Artista artista;
 
@@ -24,11 +31,11 @@ public class Cancion {
     @NonNull
     private int duracion;
 
-    @OneToMany
+    @ManyToOne
     @NonNull
     private User user;
 
-    @OneToMany
+    @ManyToOne
     @NonNull
     private Playlist playlist;
 
