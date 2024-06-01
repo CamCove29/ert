@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Cancion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
