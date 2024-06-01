@@ -1,6 +1,7 @@
 package com.example.demo.cancion.domain;
 
 import com.example.demo.album.domain.Album;
+import com.example.demo.artista.domain.Artista;
 import com.example.demo.lista_reproducción.domain.Playlist;
 import com.example.demo.user.domain.User;
 import jakarta.persistence.*;
