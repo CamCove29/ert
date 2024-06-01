@@ -15,6 +15,7 @@ public class Playlist {
     private String nombre;
     private Date fechaDeCreacion;
 
+
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
