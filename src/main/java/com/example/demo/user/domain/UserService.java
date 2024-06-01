@@ -1,6 +1,7 @@
 package com.example.demo.user.domain;
 
 
+import com.example.demo.events.EmailService;
 import com.example.demo.lista_reproducción.domain.Playlist;
 import com.example.demo.lista_reproducción.infrastructure.PlaylistRepository;
 import com.example.demo.user.infrastructure.UserRepository;
@@ -10,17 +11,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Service
+
+
+
+@RestController
+@RequestMapping("/users")
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PlaylistRepository playListRepository;
+    @Autowired
+    private EmailService emailService;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -38,14 +47,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-//    public User loginUser(String email, String password) {
-//        User user = userRepository.findByEmail(email);
-//        if (user != null && user.getPassword().equals(password)) {
-//            return user;
-//        }
-//        return null;
-//    }
-
     public List<Playlist> getAllPlayListsByUserId(int userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
@@ -54,12 +55,22 @@ public class UserService {
         return new ArrayList<>();
     }
 
-    public void createPlayList(int userId, Playlist playList) {
+    @PostMapping("/{userId}/playlists")
+    public String createPlayList(@PathVariable int userId, @RequestBody Playlist playList) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             playList.setUser(user);
             playListRepository.save(playList);
+            sendPlaylistCreationEmail(user);
+            return "Playlist created and email sent";
         }
+        return "User not found";
+    }
+
+    private void sendPlaylistCreationEmail(User user) {
+        String subject = "Playlist Created Successfully";
+        String text = "Dear " + user.getNombre() + ",\n\nYour playlist has been created successfully.";
+        emailService.sendEmail(user.getEmail(), subject, text);
     }
 
     public User findByEmail(String username) {
@@ -77,8 +88,6 @@ public class UserService {
         };
     }
 }
-
-
 
 
 
