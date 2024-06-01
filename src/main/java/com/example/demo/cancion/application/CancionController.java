@@ -1,10 +1,13 @@
 package com.example.demo.cancion.application;
 
+import com.example.demo.cancion.domain.Cancion;
 import com.example.demo.cancion.domain.CancionService;
 import com.example.demo.cancion.dto.CancionDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cancion")
@@ -30,8 +33,9 @@ public class CancionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCancion(@PathVariable CancionDto Long id) {
+    public ResponseEntity<String> deleteCancion(@PathVariable Integer id) {
         cancionService.deleteCancion(id);
         return ResponseEntity.ok("Cancion deleted.");
     }
+}
 
