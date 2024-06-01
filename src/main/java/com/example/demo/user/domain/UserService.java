@@ -1,6 +1,8 @@
 package com.example.demo.user.domain;
 
 
+import com.example.demo.lista_reproducción.domain.Playlist;
+import com.example.demo.lista_reproducción.infrastructure.PlaylistRepository;
 import com.example.demo.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private PlayListRepository playListRepository;
+    private PlaylistRepository playListRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -38,17 +40,19 @@ public class UserService {
         return null;
     }
 
-    public List<PlayList> getAllPlayListsByUserId(int userId) {
-        return playListRepository.findByUserId(userId);
+    public List<Playlist> getAllPlayListsByUserId(int userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return user.getListasDeReproduccion();
+        }
     }
 
-    public PlayList createPlayList(int userId, PlayList playList) {
+    public void createPlayList(int userId, Playlist playList) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             playList.setUser(user);
-            return playListRepository.save(playList);
+            playListRepository.save(playList);
         }
-        return null;
     }
 }
 
