@@ -15,12 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{user_id}/playlists")
+    @GetMapping("/{userId}/playlists")
     public ResponseEntity<List<Playlist>> getPlaylists(@PathVariable Integer userId) {
         return ResponseEntity.ok(userService.getAllPlayListsByUserId(userId));
     }
 
-    @PostMapping("{user_id}/playlist")
+    @PostMapping("/{userId}/playlist")
     public ResponseEntity<Void> addPlaylist(@PathVariable Integer userId, @RequestBody Playlist playlist) {
         userService.createPlayList(userId, playlist);
         return ResponseEntity.ok().build();
