@@ -65,10 +65,17 @@ public class AuthService {
         eventPublisher.publishEvent(new HelloEmailEvent(user1.getEmail()));
 
         return response;
-
-
-
-        }
-
-
     }
+    public void crearAdmin(RegisterReq req){
+
+        Optional<User> user = userRepository.findByEmail(req.getEmail());
+        if (user.isPresent()) throw new UserAlreadyExistException("Email is already registered");
+        User user1 = modelMapper.map(req, User.class);
+        user1.setPassword(passwordEncoder.encode(req.getPassword()));
+        user1.setRole(Role.ADMIN);
+        userRepository.save(user1);
+    }
+
+
+
+}
