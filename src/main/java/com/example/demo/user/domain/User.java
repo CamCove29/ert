@@ -53,6 +53,7 @@ public class User {
         return listasDeReproduccion;
     }
 
+
     public void setListasDeReproduccion(List<PlayList> listasDeReproduccion) {
         this.listasDeReproduccion = listasDeReproduccion;
     }
