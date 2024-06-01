@@ -1,5 +1,7 @@
 package com.example.demo.cancion.application;
 
+import com.example.demo.artista.domain.Artista;
+import com.example.demo.artista.infrastructure.ArtistaRepository;
 import com.example.demo.cancion.domain.Cancion;
 import com.example.demo.cancion.domain.CancionService;
 import com.example.demo.cancion.dto.CancionDto;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CancionController {
     private final CancionService cancionService;
+    private final ArtistaRepository artistaRepository;
 
     @GetMapping
     public ResponseEntity<List<Cancion>> getCanciones() {
@@ -33,9 +36,15 @@ public class CancionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCancion(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteCancion(@PathVariable Long id) {
         cancionService.deleteCancion(id);
         return ResponseEntity.ok("Cancion deleted.");
+    }
+
+    @PostMapping("/artistas")
+    public ResponseEntity<Void> createArtirsta(@RequestBody Artista artista) {
+        artistaRepository.save(artista);
+        return ResponseEntity.ok().build();
     }
 }
 

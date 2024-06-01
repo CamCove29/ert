@@ -66,7 +66,7 @@ public class CancionService {
         System.out.println("Cancion updated: " + cancionDto.getTitulo());
     }
 
-    public void deleteCancion(Integer id) {
+    public void deleteCancion(Long id) {
         cancionRepository.deleteById(id);
         System.out.println("Cancion deleted.");
     }

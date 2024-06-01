@@ -5,7 +5,7 @@ import com.example.demo.auth.dto.JwtAuthResponse;
 import com.example.demo.auth.dto.LoginReq;
 import com.example.demo.auth.dto.RegisterReq;
 import com.example.demo.config.JwtService;
-import com.example.demo.events.HelloEmailEvent;
+//import com.example.demo.events.HelloEmailEvent;
 import com.example.demo.exceptions.UserAlreadyExistException;
 import com.example.demo.user.domain.Role;
 import com.example.demo.user.domain.User;
