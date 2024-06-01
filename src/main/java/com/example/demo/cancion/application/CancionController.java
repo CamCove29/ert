@@ -33,7 +33,7 @@ public class CancionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCancion(@PathVariable CancionDto Long id) {
+    public ResponseEntity<String> deleteCancion(@PathVariable Integer id) {
         cancionService.deleteCancion(id);
         return ResponseEntity.ok("Cancion deleted.");
     }
